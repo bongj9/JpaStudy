@@ -10,13 +10,18 @@ import java.util.Date;
 public class Member {
     //db에 만들고 이후에 실행
     @Id //기본키
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @Column(name = "name") //객체에는 username이라고 쓰고싶은데 데이터베이스에는 name이라고 하고싶을때 이렇게 쓴다.
-    private String username;
+    @Column(name = "USERNAME") //객체에는 username이라고 쓰고싶은데 데이터베이스에는 name이라고 하고싶을때 이렇게 쓴다.
+    private String name;
+    private int age;
 
-    private Integer age;
+    @Column(name = "TEAM_ID")
+    private Team team;
+
+}
+
+  /*  private Integer age;
 
     @Enumerated(EnumType.STRING)
     private Roletype roletype;
@@ -89,5 +94,5 @@ public class Member {
 
     public void setDescription(String description) {
         this.description = description;
-    }
+    }*/
 }

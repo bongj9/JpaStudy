@@ -2,23 +2,61 @@ package hellojpa;
 
 import jakarta.persistence.*;
 
-import java.util.Date;
-
 @Entity
 @SequenceGenerator(name = "member-seq-generator", sequenceName = "member_seq")
 
 public class Member {
     //db에 만들고 이후에 실행
     @Id //기본키
+    @GeneratedValue
+    @Column(name = "MEMBER_ID")
     private Long id;
 
+    //Column은 객체와 테이블을 매핑하는것이다.
     @Column(name = "USERNAME") //객체에는 username이라고 쓰고싶은데 데이터베이스에는 name이라고 하고싶을때 이렇게 쓴다.
     private String name;
     private int age;
 
-    @Column(name = "TEAM_ID")
+    /*    @Column(name = "TEAM_ID")
+        private Long teamId;*/
+    //연관관계를 써줘야한다.
+    @ManyToOne
+    @JoinColumn(name = "TEAM_ID")
     private Team team;
 
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+    //연관관계 편의 메서드
+    public void changeTeam(Team team) {
+        this.team = team;
+        team.getMembers().add(this);
+    }
 }
 
   /*  private Integer age;
@@ -95,4 +133,4 @@ public class Member {
     public void setDescription(String description) {
         this.description = description;
     }*/
-}
+

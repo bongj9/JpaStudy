@@ -14,7 +14,14 @@ public class JpaMain {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         try {
-            Team team = new Team();
+            Movie movie = new Movie();
+            movie.setDirector("a");
+            movie.setActor("bbb");
+            movie.setName("바람과 함께 사라지다");
+            movie.setPrice(19000);
+
+            em.persist(movie);
+         /*   Team team = new Team();
             team.setName("teamA");
             //영속성 컨텍스 트로 추가
             em.persist(team);
@@ -28,7 +35,7 @@ public class JpaMain {
             em.flush();
             //영속성컨텍스트 초기화
             em.clear();
-
+*/
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
